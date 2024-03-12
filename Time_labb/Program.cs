@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,6 +38,18 @@ namespace Time_labb
                 else
                 {
                     return $"{Hours:D2}:{Minutes:D2}:{Seconds:D2}";
+                }
+            }
+
+            public bool IsAm()
+            {
+                if (Hours <= 12)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
         }

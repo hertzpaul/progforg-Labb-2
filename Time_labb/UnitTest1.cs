@@ -54,5 +54,21 @@ namespace Time_labb
             Program.Time time = new Program.Time(14, 45, 45);
             Assert.That(time.ToString(is12HourFormat: true), Is.EqualTo("02:45:45 pm"));
         }
+
+        [Test]
+        public void IsAm_BeforeNoon_ReturnsTrue()
+        {
+            Program.Time time = new Program.Time(10, 30, 12);
+            bool result = time.IsAm();
+
+            Assert.IsTrue(result);
+        }
+        public void IsAm_AfterNoon_ReturnsFalse()
+        {
+            Program.Time time = new Program.Time(13, 30, 12);
+            bool result = time.IsAm();
+
+            Assert.IsFalse(result);
+        }
     }
 }
