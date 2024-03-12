@@ -8,9 +8,31 @@ namespace Time_labb
         }
 
         [Test]
-        public void Test1()
+        public void Isvalid_ValidTime_ReturnsStrue()
         {
-            Assert.Pass();
+            Program.Time time = new Program.Time(12, 30, 23);
+            Assert.IsTrue(time.IsValid());
+        }
+
+        [Test]
+        public void Isvalid_InValidHour_ReturnsFalse()
+        {
+            Program.Time time = new Program.Time(25, 30, 30);
+            Assert.IsFalse(time.IsValid());
+        }
+
+        [Test]
+        public void Isvalid_InValidMinutes_ReturnsFalse()
+        {
+            Program.Time time = new Program.Time(12, 63, 30);
+            Assert.IsFalse(time.IsValid());
+        }
+
+        [Test]
+        public void Isvalid_InValidSeconds_ReturnsFalse()
+        {
+            Program.Time time = new Program.Time(12, 30, 70);
+            Assert.IsFalse(time.IsValid());
         }
     }
 }
