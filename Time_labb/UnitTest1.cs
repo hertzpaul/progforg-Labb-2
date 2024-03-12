@@ -34,5 +34,25 @@ namespace Time_labb
             Program.Time time = new Program.Time(12, 30, 70);
             Assert.IsFalse(time.IsValid());
         }
+
+        [Test]
+        public void ToString_24HoursFormat_ReturnsCorrectFormat()
+        {
+            Program.Time time = new Program.Time(15, 23, 12);
+            Assert.That(time.ToString(is12HourFormat: false), Is.EqualTo("15:23:12"));
+        }
+        [Test]
+        public void ToString_12HourFormat_Am_ReturnsCorrectFormat()
+        {
+            Program.Time time = new Program.Time(02, 32, 01);
+            Assert.That(time.ToString(is12HourFormat: true), Is.EqualTo("02:32:01 am"));
+        }
+
+        [Test]
+        public void ToString_12HourFormat_Pm_ReturnsCorrectFormat()
+        {
+            Program.Time time = new Program.Time(14, 45, 45);
+            Assert.That(time.ToString(is12HourFormat: true), Is.EqualTo("02:45:45 pm"));
+        }
     }
 }

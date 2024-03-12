@@ -25,6 +25,20 @@ namespace Time_labb
             {
                 return Hours >= 0 && Hours <= 23 && Minutes >= 0 && Minutes <= 59 && Seconds >= 0 && Seconds <= 59;
             }
+
+            public string ToString(bool is12HourFormat)
+            {
+                if (is12HourFormat)
+                {
+                    int hours = Hours % 12 == 0 ? 12 : Hours % 12;
+                    string timePeriod = Hours <= 12 ? "am" : "pm";
+                    return $"{hours:D2}:{Minutes:D2}:{Seconds:D2} {timePeriod}";
+                }
+                else
+                {
+                    return $"{Hours:D2}:{Minutes:D2}:{Seconds:D2}";
+                }
+            }
         }
     }
 }
