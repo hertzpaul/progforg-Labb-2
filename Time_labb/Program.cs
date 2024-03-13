@@ -21,7 +21,7 @@ namespace Time_labb
                 Minutes = minutes;
                 Seconds = seconds;
             }
-             
+
             public bool IsValid()
             {
                 return Hours >= 0 && Hours <= 23 && Minutes >= 0 && Minutes <= 59 && Seconds >= 0 && Seconds <= 59;
@@ -51,6 +51,65 @@ namespace Time_labb
                 {
                     return false;
                 }
+            }
+
+            public static Time operator +(Time time, int seconds)
+            {
+                int totalSeconds = time.Hours * 3600 + time.Minutes * 60 + time.Seconds + seconds;
+                int newHours = totalSeconds / 3600 % 24;
+                int newMinutes = (totalSeconds % 3600) / 60;
+                int newSeconds = totalSeconds % 60;
+
+                return new Time(newHours, newMinutes, newSeconds);
+            }
+
+            public static Time operator -(Time time, int seconds)
+            {
+                int totalSeconds = time.Hours * 3600 + time.Minutes * 60 + time.Seconds - seconds;
+                if (totalSeconds < 0)
+                {
+                    totalSeconds += 24 * 3600;
+                }
+                int newHours = totalSeconds / 3600 % 24;
+                int newMinutes = (totalSeconds % 3600) / 60;
+                int newSeconds = totalSeconds % 60;
+
+                return new Time(newHours, newMinutes, newSeconds);
+            }
+
+            public static bool operator ==(Time time1, Time time2)
+            {
+                if (ReferenceEquals(time1, time2))
+                {
+                    return true;
+                }
+                if (time1 is null || time2 is null)
+                {
+                    return false;
+                }
+                return time1.Hours == time2.Hours && time1.Minutes == time2.Minutes && time1.Seconds == time2.Seconds;
+            }
+            public static bool operator !=(Time time1, Time time2)
+            {
+                return !(time1 == time2);
+            }
+            public static bool operator <(Time time1, Time time2)
+            {
+                return time1.Hours < time2.Hours || (time1.Hours == time2.Hours && time1.Minutes < time2.Minutes) || (time1.Hours == time2.Hours && time1.Minutes == time2.Minutes && time1.Seconds < time2.Seconds);
+            }
+
+            public static bool operator >(Time time1, Time time2)
+            {
+                return time1.Hours > time2.Hours || (time1.Hours == time2.Hours && time1.Minutes > time2.Minutes) || (time1.Hours == time2.Hours && time1.Minutes == time2.Minutes && time1.Seconds > time2.Seconds);
+
+            }
+            public static bool operator <=(Time time1, Time time2)
+            {
+                return time1 == time2 || time1 < time2;
+            }
+            public static bool operator >=(Time time1, Time time2)
+            {
+                return time1 == time2 || time1 > time2;
             }
         }
     }
